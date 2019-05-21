@@ -1,0 +1,27 @@
+package com.epam.utils.testNG;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.util.*;
+
+public class TestFileReaderMethod extends CommonCondition {
+    private String pathToFail="D:\\Utils\\src\\main\\java\\com\\epam\\utils\\sandBox\\Help.txt";
+    private String expectedValueSrting="Usage: touch [OPTION]... FILE...";
+
+    private List<String> realValuelist,expectedValuelist;
+
+    @Test
+    public void testIsCurrentStringIsSameFromFileReaderMethod(){
+        expectedValuelist=new ArrayList<>();
+        expectedValuelist.add(expectedValueSrting);
+        try {
+            realValuelist=utils.fileReader(pathToFail);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(expectedValuelist,realValuelist);
+    }
+}
