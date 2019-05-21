@@ -3,14 +3,17 @@ package com.epam.utils.testNG;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
+
 public class TestRenameFileMethod extends CommonCondition {
 
-    private String pathToFile ="D:\\Utils\\src\\main\\java\\com\\epam\\utils\\sandBox\\ex1.txt";
-    private String pathToNewFile ="D:\\Utils\\src\\main\\java\\com\\epam\\utils\\sandBox\\ex2.txt";
-
     @Test
-    public void testIsFileRenamed(){
-        boolean actualValue=utils.renameFile(pathToFile,pathToNewFile);
+    public void testIsFileRenamed() throws IOException {
+        new File(OLD_Path_To_File).createNewFile();
+        boolean actualValue=utils.renameExistingFile(DIR_NAME,OLD_FILENAME,NEW_FILENAME);
         Assert.assertTrue(actualValue);
+        new File(New_Path_To_File).delete();
+
     }
 }

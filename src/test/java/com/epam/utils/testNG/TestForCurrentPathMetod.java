@@ -3,14 +3,16 @@ package com.epam.utils.testNG;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
+
 public class TestForCurrentPathMetod extends CommonCondition{
 
-   private String expectedPathValue="D:\\Utils";
 
     @Test
-    public void testIsCurrentPathMetod(){
-        expectedValueSrting=utils.currentPath();
-        expectedValue=expectedValueSrting.contains(expectedPathValue);
-        Assert.assertTrue(expectedValue);
+    public void testIsCurrentPathMetod() throws IOException {
+        realValueString=utils.currentPath();
+        expectedValueSrting=new File( "." ).getCanonicalPath();
+        Assert.assertEquals(realValueString,expectedValueSrting);
     }
 }

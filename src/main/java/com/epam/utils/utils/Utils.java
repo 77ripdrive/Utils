@@ -1,24 +1,15 @@
 package com.epam.utils.utils;
 
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Utils {
   private    String pathToFile,realStringInFile;
-  private boolean deleted;
-   private File file,newFile;
+  private boolean  newFileIsCreated,deleted,newFolderIsCreated;
+   private File file;
 
-    public    String scanOption(){
-        Scanner scanner = new Scanner(System.in);
-        String choiceOf=scanner.nextLine();
-       return choiceOf;
-
-    }
-
-   public List<String> fileReader (String fileName)  throws java.lang.OutOfMemoryError, IOException  {
+   public List<String> fileReader (String fileName)  throws  IOException  {
        BufferedReader reader = new BufferedReader(new FileReader(fileName));
        List<String> list = new ArrayList<>();
        while (( realStringInFile = reader.readLine()) != null) {
@@ -30,74 +21,85 @@ public class Utils {
 
     public String findFile(String fileName,File file) {
         File[] list = file.listFiles();
-        if (list != null) {
-            for (File nextFile : list) {
+        for (File nextFile : list) {
                 if (nextFile.isDirectory()) {
                     findFile(fileName, nextFile);
                 } else if (fileName.equalsIgnoreCase(nextFile.getName())) {
-                    pathToFile=nextFile.getAbsolutePath();
-                    System.out.println("Found");
+                     pathToFile=nextFile.getAbsolutePath();
+
                     System.out.println("File found at : " + nextFile.getParentFile());
-                    System.out.println("Path diectory: " + nextFile.getAbsolutePath());
-
+                    System.out.println("Path diectory: " + pathToFile);
+                    return pathToFile;
                 }
-            }
-        }
-        return pathToFile;
+            }return "Directory";
+
+
     }
 
-    public boolean createFolder(String pathnameWithDirName) {
+    public String createFolder(String pathnameWithDirName) {
         File dir = new File(pathnameWithDirName);
-        boolean created = dir.mkdir();
-        if (created)
-            System.out.println("Folder has been created");
-        return created;
+        newFolderIsCreated = dir.mkdir();
+        if (newFolderIsCreated) {
+            System.out.println("Folder has been created" + dir.getAbsolutePath());
+            return "Folder has been created";
+        }else {return "Folder has not been created";}
     }
 
-    public boolean renameFile (String pathToFile,String newPathToFile) {
-        file = new File(pathToFile);
-        newFile = new File(newPathToFile);
-        boolean fileIsRanamed=file.renameTo(newFile);
-        if (fileIsRanamed) {
-            System.out.println("File successfully renamed :" + newFile);
-        } else {
-            System.out.println("File not renamed ");
-        }
-        return fileIsRanamed;
-    }
+
+       public boolean renameExistingFile(String dirName, String oldFileName, String newFileName){
+
+            final File oldFile = new File(dirName,oldFileName);
+            final File newFile = new File(dirName, newFileName);
+            if(oldFile.exists() && !newFile.exists()) {
+                newFileIsCreated=oldFile.renameTo(newFile);
+                if(newFileIsCreated) {
+                    System.out.println("Fail is renamed");
+                } else {
+                    System.out.println("Fail is not renamed");
+                }
+            }return newFileIsCreated;
+       }
+
 
     public   String currentPath(){
-        String current = null;
         try {
-            current = new java.io.File( "." ).getCanonicalPath();
+            pathToFile = new File( "." ).getCanonicalPath();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Current dir:"+current);
-     return current;
+        System.out.println("Current dir:"+pathToFile);
+     return pathToFile;
     }
 
-    public boolean deleteFile(String path) {
+    public boolean deleteFile(final String path) {
             file = new File(path);
+        if (file.exists()) {
             deleted = file.delete();
-        System.out.println("Item   :" + path +  deleted +" - deleted");
-
-        return deleted;
+            if (deleted) {
+                System.out.println("Item is deleted");
+                return deleted;
+            } else
+                System.out.println("Item is not deleted");
+            return deleted;
+        }else
+            System.out.println("Item is not exist");
+        return file.exists();
     }
 
-    public boolean createFile(String fileName){
-        File newFile = new File(fileName);
-        boolean created=true;
-        try
-        {
-             created = newFile.createNewFile();
-            if(created)
-                System.out.println("File has been created");
+    public boolean createFile(String path) {
+        file = new File(path);
+        try {
+            newFileIsCreated = file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch(IOException ex){
-            System.out.println(ex.getMessage());
-        }
-        return created;
+        if (newFileIsCreated) {
+                System.out.println("Item is created");
+                return newFileIsCreated;
+            } else
+                System.out.println("Item is not created");
+            return newFileIsCreated;
+
     }
 
     public   boolean infoDir(String path){
@@ -116,7 +118,7 @@ public class Utils {
                 }
             }
         }
-
         return infoIs;
     }
+
 }

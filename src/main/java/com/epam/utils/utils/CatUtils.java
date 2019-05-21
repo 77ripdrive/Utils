@@ -4,26 +4,24 @@ import java.io.IOException;
 
 public class CatUtils extends BaseUtils {
 
-    private String choiceOf, pathToFile;
-
-    public void setChoiceOfCommand() {
+    public void selectMenuItem() {
+        String  pathToFile;
         do {
-            System.out.println("Selection of available flags or commands \n" +
+            System.out.println("Select a number with command from the menu \n" +
                     "\t  Usage: cat [OPTION]... [FILE]...\n" +
                     "\t    Concatenate FILE(s) to standard output.\n" +
-                    " 1  cat  fileName  - \tOutput file \n" +
-                    " 2  cat -A fileName  - \ttOutput file ,equivalent to -vET  \n");
+                    " 1  \tcat  fileName  - \tOutput file \n" +
+                    " 2  \tcat -A fileName  - \ttOutput file ,equivalent to -vET  \n");
 
             System.out.println("exit -  \tfor stop execution in this section");
             System.out.println("Enter number of command");
 
-           choiceOf=utils.scanOption();
+           choiceOf = reader.scanOption();
 
             switch (choiceOf) {
-
                 case "1":
                     System.out.println("Enter path to file  ");
-                    pathToFile = utils.scanOption();
+                    pathToFile = reader.scanOption();
                     try {
                         utils.fileReader(pathToFile);
                     } catch (IOException e) {
@@ -32,7 +30,7 @@ public class CatUtils extends BaseUtils {
                     break;
                 case "2":
                     System.out.println("Enter full path to folder  ");
-                    pathToFile = utils.scanOption();
+                    pathToFile = reader.scanOption();
                     try {
                         utils.fileReader(pathToFile);
                     } catch (IOException e) {
