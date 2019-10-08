@@ -1,4 +1,4 @@
-package com.epam.utils.utils;
+package com.utils.utils;
 
 import java.io.*;
 import java.util.ArrayList;

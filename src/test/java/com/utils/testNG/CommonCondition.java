@@ -1,6 +1,6 @@
-package com.epam.utils.testNG;
+package com.utils.testNG;
 
-import com.epam.utils.utils.Utils;
+import com.utils.utils.Utils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 

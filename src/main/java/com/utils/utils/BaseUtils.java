@@ -1,6 +1,6 @@
-package com.epam.utils.utils;
+package com.utils.utils;
 
-import com.epam.utils.services.Reader;
+import com.utils.services.Reader;
 
 public abstract class BaseUtils {
 

@@ -1,6 +1,6 @@
-package com.epam.utils;
+package com.utils;
 
-import com.epam.utils.utils.*;
+import com.utils.utils.MainMenu;
 
 public class Runner {
 
