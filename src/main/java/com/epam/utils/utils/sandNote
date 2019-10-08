@@ -1,0 +1,22 @@
+git cherry -v master
+git cherry -v master | wc -l
+git rebase -i HEAD~5
+
+<span>Historical Data</span>
+./gradlew build -x test
+
+git checkout master
+git pull
+git checkout <branch>
+git rebase master
+git branch --set-upstream-to=origin/ master
+
+git pull origin master --allow-unrelated-histories
+git branch --set-upstream-to=origin/master master  
+
+./gradlew spotlessApply
+./gradlew build --dry-run
+./gradlew build -x test
+./gradlew build -x test -x spotlessDocumentation
+./gradlew spotlessApply
+./gradlew build --dry-run
