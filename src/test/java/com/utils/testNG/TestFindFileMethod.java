@@ -1,7 +1,4 @@
-package com.epam.utils.testNG;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
+package com.utils.testNG;
 
 import java.io.File;
 

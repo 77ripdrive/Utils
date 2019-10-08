@@ -1,4 +1,4 @@
-package com.epam.utils.testNG;
+package com.utils.testNG;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

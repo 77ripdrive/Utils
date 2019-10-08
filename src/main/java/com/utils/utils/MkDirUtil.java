@@ -1,4 +1,4 @@
-package com.epam.utils.utils;
+package com.utils.utils;
 
 public class MkDirUtil extends BaseUtils{
 
